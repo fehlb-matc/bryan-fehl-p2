@@ -11,35 +11,6 @@ function get(element) {
     return document.getElementById(element);
 }
 
-function generateTotal() {
-    // This array will hold the line items from the calculator
-    var lineItems = [];
-
-}
-/* EXAMPLE
-    <div class="line-item" id="li-1">
-        <span class="item-number" id="li-1-number">Item 1:</span>
-        <label for="li-1-category">Category</label>
-        <select name="li-1-category" id="li-1-category">
-            <option value="toys">Toys</option>
-            <option value="school">School Supplies</option>
-            <option value="home">Home and Garden</option>
-            <option value="bath">Bath and Bedroom</option>
-        </select>
-
-        <label for="li-1-item">dasgadsg</label>
-        <select name="li-1-item" id="li-1-item">
-            <option value="toy-action-hank">Action Hank Figurine</option>
-        </select>
-        <span class="field-label">Cost:</span>
-        <span id="li-1-cost">32532</span>
-        <label>Item Count</label>
-        <input name="li-1-count" id="li-1-count" type="text" value="0">
-        <label>Subtotal:</label>
-        <input name="li-1-total" id="li-1-total" type="text" value="$0" disabled>
-    </div>
-*/
-
 // Function that updates the individual item costs, subtotals, and invoice total
 // Intended to be used when elements in the form change
 function updateCosts() {
@@ -112,6 +83,7 @@ function updateItemList() {
 function addLine() {
     var itemListFieldset = get('item-list');
     
+    // Add the default values the array will use
     itemArray.push({
         "name"  : "toy-action-hank",
         "cat"   : "toys",
@@ -125,6 +97,7 @@ function addLine() {
     var newDiv = document.createElement('div');
     newDiv.id  = "li-" + curItem.toString();
     newDiv.classList.add("line-item");
+
     // Depending on the current row count, apply the even or odd class
     if (curItem % 2 == 0)
     {
@@ -144,7 +117,6 @@ function addLine() {
     newDiv.append(newElement);
 
     // Add the Category Label
-    // <label for="li-1-category">Category</label>
     newElement = document.createElement('label');
     newElement.id        = "li-" + curItem.toString() + "-cat-label";
     newElement.htmlFor   = "li-" + curItem.toString() + "-category";
@@ -152,7 +124,6 @@ function addLine() {
     newDiv.append(newElement);
 
     // Add the category select
-    // <select name="li-1-category" id="li-1-category">
     newElement = document.createElement('select');
     newElement.name = "li-" + curItem.toString() + "-category";
     newElement.id   =  newElement.name;
@@ -169,21 +140,18 @@ function addLine() {
     newDiv.append(newElement);
 
     //  Add the label for the actual item itself
-    //<label for="li-1-item">dasgadsg</label>
     newElement = document.createElement('label');
     newElement.htmlFor   = "li-" + curItem.toString() + "-item";
     newElement.innerHTML = "Item:";
     newDiv.append(newElement);
     
     // Add the actual item select
-    // <select name="li-1-item" id="li-1-item">
     newElement = document.createElement('select');
     newElement.name = "li-" + curItem.toString() + "-item";
     newElement.id   = "li-" + curItem.toString() + "-item";
     newElement.onchange = updateCosts;
 
     // Loop through all the items in the category an add options for the select
-    // <option value="toy-action-hank">Action Hank Figurine</option>
     for (item in itemDetails["toys"]){
         newOption = document.createElement('option');
         newOption.value     = item;
@@ -193,14 +161,12 @@ function addLine() {
     newDiv.append(newElement);
 
     // Add the span pseudo label for the cost field
-    // <span class="field-label">Cost:</span>
     newElement = document.createElement('label');
     newElement.classList.add("field-label");
     newElement.innerHTML = "Cost:";
     newDiv.append(newElement);
 
-    // Add the actual cost of the item as a
-    // <input name="li-1-cost" id="li-1-cost" type="text" value="32532" disabled>
+    // Add the actual cost of the item as a disabled input
     newElement = document.createElement('input');
     newElement.name     = "li-" + curItem.toString() + "-cost";
     newElement.id       = "li-" + curItem.toString() + "-cost";
@@ -211,13 +177,11 @@ function addLine() {
     newDiv.append(newElement);
 
     // Add the label field for the item count
-    // <label>Item Count</label>
     newElement = document.createElement('label');
     newElement.innerHTML = "Count:";
     newDiv.append(newElement);
 
     // Add the input count field
-    // <input name="li-1-count" id="li-1-count" type="text" value="0">
     newElement = document.createElement('input');
     newElement.type     = "text";
     newElement.name     = "li-" + curItem.toString() + "-count";
@@ -228,13 +192,11 @@ function addLine() {
     newDiv.appendChild(newElement);
 
     // Add the subtotal label
-    // <label>Subtotal:</label>
     newElement = document.createElement('label');
     newElement.innerHTML = "Subtotal:";
     newDiv.appendChild(newElement);
 
     // Add the sub total cost of the item times the item count
-    // <input name="li-1-total" id="li-1-total" type="text" value="$0" disabled></input>
     newElement = document.createElement('input');
     newElement.name     = "li-" + curItem.toString() + "-total";
     newElement.id       = "li-" + curItem.toString() + "-total";
@@ -250,7 +212,6 @@ function addLine() {
 
 // This function is called by the Remove button, removes the last line item from the page
 function removeLine() {
-    // newDiv.id  = "li-" + curItem.toString();
 
     // As a safety measure, only attempt to delete the line if it's not the last one remaining.
     if (itemArray.length > 1)

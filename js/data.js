@@ -1,8 +1,5 @@
 // Item category and pricing data
 
-// Map that holds item pricing details
-var itemPricing = new Map();
-
 // JSON object holding item details
 var itemDetails = {
     "toys":{
@@ -110,14 +107,8 @@ var itemDetails = {
         }
     }
 }
-// Map that holds item categor
+// Map that holds item categories and they're human descriptive names
 var itemCategories = new Map();
-
-// Insert item categories
-//itemCategories.set("toys"  , ['toy-action-hank'   ,'toy-barbie-doll', 'toy-rubix-cube' , 'toy-8-ball'   , 'toy-dart-board', 'toy-lego-set'    ]);
-//itemCategories.set("school", ['school-pencil-case', 'school-notepad', 'school-eraser'  , 'school-folder', 'school-glue'   , 'school-paper'    ]);
-//itemCategories.set("home"  , ['home-rake'         , 'home-broom'    , 'home-light-bulb', 'home-clippers', 'home-bug-spray', 'home-hose'       ]);
-//itemCategories.set("bath"  , ['bath-rug'          , 'bath-handsoap' , 'bath-candle'    , 'bath-towel'   , 'bath-curtains' , 'bath-toiletpaper']);
 
 itemCategories.set("toys"  , "Toys");
 itemCategories.set("school", "School Supplies");
